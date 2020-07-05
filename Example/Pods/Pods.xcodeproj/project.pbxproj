@@ -7,73 +7,75 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0ACE4E1621051D2FAA39B7F9B107798E /* SwipeableCardStack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005DC0A1ED294630CD8004F8C97E137 /* SwipeableCardStack-dummy.m */; };
-		51FECAAA171A39CAA357F7B171C5C945 /* SwipeableCardStack-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 506B2897FCD68C2F6B4BA208509D6976 /* SwipeableCardStack-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		749B05DD0E064AFF94EA3A67F246B52C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		26D1FD08B23B2F23CE4F004672A22280 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312B988EF117AE4DE76A268D970131FE /* UIKit.framework */; };
+		749B05DD0E064AFF94EA3A67F246B52C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
 		7538FA0962E59BD74984A229B0542E0A /* Pods-SwipeableCardStack_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1804A40C5F72C4CD3076404D9FD58F40 /* Pods-SwipeableCardStack_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		949B4ECEAAB906F581F00AAFD2E083FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		8C7C4DEF33BD8B676CBE8A2931B8827D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
+		949B4ECEAAB906F581F00AAFD2E083FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
+		9BC306AE35A540D7D520221560204514 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCE56725F1B866B4BC25E1143B58BC6 /* CardView.swift */; };
 		A0F913100D1CCE4889A8AF2040478269 /* Pods-SwipeableCardStack_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E44C289A5E024AD837BC09BD1FD4FCD7 /* Pods-SwipeableCardStack_Tests-dummy.m */; };
-		B9772C1324B1F6A700AC5344 /* SelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9772C1024B1F6A600AC5344 /* SelectedView.swift */; };
-		B9772C1424B1F6A700AC5344 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9772C1124B1F6A600AC5344 /* CardView.swift */; };
-		B9772C1524B1F6A700AC5344 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9772C1224B1F6A600AC5344 /* StackView.swift */; };
 		C61994EB8E48FF6574DA33DF968FA7DB /* Pods-SwipeableCardStack_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CC49ACE3202F34EF896CF4EEC2582D /* Pods-SwipeableCardStack_Example-dummy.m */; };
+		CA05C480C49EFF7F735413F96AF77C8E /* SwipeableCardStack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8861C306E06C3DBDD739730B8590D64D /* SwipeableCardStack-dummy.m */; };
 		CE7E330B399933201B25771EA87E9BCD /* Pods-SwipeableCardStack_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0681102FDB38E7A60E837847ABB4E803 /* Pods-SwipeableCardStack_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F388D8044CC596D02C2383B08BB98106 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		D75750BBC3A75C6E097D27DFE7A7C247 /* SwipeableCardStack-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC30031E55094C7F4EF06E2CE75BF6 /* SwipeableCardStack-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DD53610ACBADE2FB62A0DFD102477FBA /* SelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE2C7DAC16DB2B2DC2E092A23B32313 /* SelectedView.swift */; };
+		F3B40AC33601D71E95402D3459A4C876 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B069968D587F49F4E581DC459B01F /* StackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2B5EE300592F8B77C579A16C9E08E730 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C2D4A45627BCA1AD57241514778964B2;
-			remoteInfo = "Pods-SwipeableCardStack_Example";
-		};
-		CC97AE33824DABEEE8742AE33492EA7C /* PBXContainerItemProxy */ = {
+		8167EAE0172A733039EBE3FAA22D0E95 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 3A3F8DD082340FD17EAA18BCA34DAFA3;
 			remoteInfo = SwipeableCardStack;
 		};
+		C0A022EAABF7A6AA77AB23EE7DB5EF84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C2D4A45627BCA1AD57241514778964B2;
+			remoteInfo = "Pods-SwipeableCardStack_Example";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0005DC0A1ED294630CD8004F8C97E137 /* SwipeableCardStack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwipeableCardStack-dummy.m"; sourceTree = "<group>"; };
-		03474D9FE77FD5009F58E61E3426D094 /* SwipeableCardStack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwipeableCardStack-prefix.pch"; sourceTree = "<group>"; };
 		0681102FDB38E7A60E837847ABB4E803 /* Pods-SwipeableCardStack_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwipeableCardStack_Tests-umbrella.h"; sourceTree = "<group>"; };
-		07674D4034FFCBEFBDD2AB237010457E /* SwipeableCardStack.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwipeableCardStack.modulemap; sourceTree = "<group>"; };
 		090914CF226698D707C4D89E4588E67F /* Pods-SwipeableCardStack_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwipeableCardStack_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		0AFC30031E55094C7F4EF06E2CE75BF6 /* SwipeableCardStack-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwipeableCardStack-umbrella.h"; sourceTree = "<group>"; };
+		16DD963171A190121C1B1F5D2632E481 /* SwipeableCardStack.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = SwipeableCardStack.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		1804A40C5F72C4CD3076404D9FD58F40 /* Pods-SwipeableCardStack_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwipeableCardStack_Example-umbrella.h"; sourceTree = "<group>"; };
 		181BC249FA348B84C9B73038123C1883 /* Pods-SwipeableCardStack_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SwipeableCardStack_Tests.modulemap"; sourceTree = "<group>"; };
-		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3B47A19B91A4774A5E67DF7621643AB5 /* SwipeableCardStack.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = SwipeableCardStack.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		40231D5E848D6E13BB1DDAA6928E0317 /* SwipeableCardStack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwipeableCardStack.debug.xcconfig; sourceTree = "<group>"; };
-		41017D28738D07253379AA172A05409F /* SwipeableCardStack-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwipeableCardStack-Info.plist"; sourceTree = "<group>"; };
+		312B988EF117AE4DE76A268D970131FE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		38E2C4775A92BB1D1E9D742E829AE4CE /* SwipeableCardStack.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwipeableCardStack.modulemap; sourceTree = "<group>"; };
+		3A333849DA34174BE804FBA946B655DF /* SwipeableCardStack-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwipeableCardStack-Info.plist"; sourceTree = "<group>"; };
+		3BCB5DFC1E59276E7CC6A31CE24A65A4 /* SwipeableCardStack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwipeableCardStack.debug.xcconfig; sourceTree = "<group>"; };
+		436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		4C3D6087D8718D18ECF34AAF233C1B5F /* Pods-SwipeableCardStack_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwipeableCardStack_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		506B2897FCD68C2F6B4BA208509D6976 /* SwipeableCardStack-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwipeableCardStack-umbrella.h"; sourceTree = "<group>"; };
 		62CC49ACE3202F34EF896CF4EEC2582D /* Pods-SwipeableCardStack_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwipeableCardStack_Example-dummy.m"; sourceTree = "<group>"; };
+		638B069968D587F49F4E581DC459B01F /* StackView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StackView.swift; path = SwipeableCardStack/Classes/StackView.swift; sourceTree = "<group>"; };
+		6FCA45306EEC537F5C7CA872C0566DEF /* SwipeableCardStack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwipeableCardStack-prefix.pch"; sourceTree = "<group>"; };
 		7B84A7A900BE994281D4D6678F76344E /* Pods-SwipeableCardStack_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwipeableCardStack_Example-Info.plist"; sourceTree = "<group>"; };
+		834C9319CBF30B202416FC66D3C49878 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		8861C306E06C3DBDD739730B8590D64D /* SwipeableCardStack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwipeableCardStack-dummy.m"; sourceTree = "<group>"; };
+		8AE2C7DAC16DB2B2DC2E092A23B32313 /* SelectedView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SelectedView.swift; path = SwipeableCardStack/Classes/SelectedView.swift; sourceTree = "<group>"; };
 		93E892CFF44BCFE4509767C96D5338D4 /* Pods-SwipeableCardStack_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwipeableCardStack_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		B9772C1024B1F6A600AC5344 /* SelectedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectedView.swift; path = SwipeableCardStack/Classes/SelectedView.swift; sourceTree = "<group>"; };
-		B9772C1124B1F6A600AC5344 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardView.swift; path = SwipeableCardStack/Classes/CardView.swift; sourceTree = "<group>"; };
-		B9772C1224B1F6A600AC5344 /* StackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StackView.swift; path = SwipeableCardStack/Classes/StackView.swift; sourceTree = "<group>"; };
 		B992CF737C598103A4355126D0C556EA /* Pods-SwipeableCardStack_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwipeableCardStack_Example.release.xcconfig"; sourceTree = "<group>"; };
 		BCE405530092F10C1C736F7ABA94CCB2 /* Pods-SwipeableCardStack_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwipeableCardStack_Tests-Info.plist"; sourceTree = "<group>"; };
 		BE0959B74AA262F19217206759BB9BAB /* Pods_SwipeableCardStack_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeableCardStack_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C37A5B80EC4AB7A27BFB09A12486502E /* SwipeableCardStack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwipeableCardStack.release.xcconfig; sourceTree = "<group>"; };
-		C6F3A93EBD8D3693323B9A3B3352A390 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C39C896F6681474233A7600E7AC31BE7 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C90F2832711C1141757B6705898B9BA0 /* SwipeableCardStack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwipeableCardStack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF1153FC3828E4229C0DE7E49CFB1F14 /* Pods-SwipeableCardStack_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwipeableCardStack_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		CFD8EA1BFD3D0DB8F8C5B0E854422688 /* Pods-SwipeableCardStack_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwipeableCardStack_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D0C169BDA8A789DE2FC5DA72814D3270 /* Pods-SwipeableCardStack_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwipeableCardStack_Example-frameworks.sh"; sourceTree = "<group>"; };
+		D7180C92C731505585EE847E73605A3B /* SwipeableCardStack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwipeableCardStack.release.xcconfig; sourceTree = "<group>"; };
 		D95421D3CE67FC73BAC1F83D8290B019 /* Pods-SwipeableCardStack_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwipeableCardStack_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		DCCE56725F1B866B4BC25E1143B58BC6 /* CardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CardView.swift; path = SwipeableCardStack/Classes/CardView.swift; sourceTree = "<group>"; };
 		DD7CFD93005C9DDF016BCCF0D15CA964 /* Pods_SwipeableCardStack_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeableCardStack_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE74BD5355811A38C033A6418E0B5B73 /* Pods-SwipeableCardStack_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SwipeableCardStack_Example.modulemap"; sourceTree = "<group>"; };
 		E2DE6BF46B39642641433187ED209511 /* Pods-SwipeableCardStack_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwipeableCardStack_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E44C289A5E024AD837BC09BD1FD4FCD7 /* Pods-SwipeableCardStack_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwipeableCardStack_Tests-dummy.m"; sourceTree = "<group>"; };
-		FB042E3C8F9F727BF1534DE4E7AFE521 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,11 +87,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B0FB60ACC6F0F636B3655F5954C77425 /* Frameworks */ = {
+		7B2971B53CB898CE0BD2B96F2C055117 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F388D8044CC596D02C2383B08BB98106 /* Foundation.framework in Frameworks */,
+				8C7C4DEF33BD8B676CBE8A2931B8827D /* Foundation.framework in Frameworks */,
+				26D1FD08B23B2F23CE4F004672A22280 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,29 +107,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		31B473B458A9DD18E3FD8E7A72E9E69A /* Support Files */ = {
+		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				07674D4034FFCBEFBDD2AB237010457E /* SwipeableCardStack.modulemap */,
-				0005DC0A1ED294630CD8004F8C97E137 /* SwipeableCardStack-dummy.m */,
-				41017D28738D07253379AA172A05409F /* SwipeableCardStack-Info.plist */,
-				03474D9FE77FD5009F58E61E3426D094 /* SwipeableCardStack-prefix.pch */,
-				506B2897FCD68C2F6B4BA208509D6976 /* SwipeableCardStack-umbrella.h */,
-				40231D5E848D6E13BB1DDAA6928E0317 /* SwipeableCardStack.debug.xcconfig */,
-				C37A5B80EC4AB7A27BFB09A12486502E /* SwipeableCardStack.release.xcconfig */,
+				E2983683FD097A93297E2F5D4E382B36 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2D6CDAE419D4363E8141030F823C6611 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F04ECB6D9BC08911E55682DE183D693C /* SwipeableCardStack */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		63A9B075E9148B55100A71859F356E1B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				38E2C4775A92BB1D1E9D742E829AE4CE /* SwipeableCardStack.modulemap */,
+				8861C306E06C3DBDD739730B8590D64D /* SwipeableCardStack-dummy.m */,
+				3A333849DA34174BE804FBA946B655DF /* SwipeableCardStack-Info.plist */,
+				6FCA45306EEC537F5C7CA872C0566DEF /* SwipeableCardStack-prefix.pch */,
+				0AFC30031E55094C7F4EF06E2CE75BF6 /* SwipeableCardStack-umbrella.h */,
+				3BCB5DFC1E59276E7CC6A31CE24A65A4 /* SwipeableCardStack.debug.xcconfig */,
+				D7180C92C731505585EE847E73605A3B /* SwipeableCardStack.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/SwipeableCardStack";
-			sourceTree = "<group>";
-		};
-		3A90A10DC118452EE06E7D2272650ED0 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				FB042E3C8F9F727BF1534DE4E7AFE521 /* LICENSE */,
-				C6F3A93EBD8D3693323B9A3B3352A390 /* README.md */,
-				3B47A19B91A4774A5E67DF7621643AB5 /* SwipeableCardStack.podspec */,
-			);
-			name = Pod;
 			sourceTree = "<group>";
 		};
 		7D4AF5113D2908850C6553D8FAC6D62A /* Products */ = {
@@ -181,49 +190,44 @@
 			path = "Target Support Files/Pods-SwipeableCardStack_Example";
 			sourceTree = "<group>";
 		};
-		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				EA97308A54E8385BFA366CFABF7D5DC5 /* Development Pods */,
-				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				2D6CDAE419D4363E8141030F823C6611 /* Development Pods */,
+				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
 				7D4AF5113D2908850C6553D8FAC6D62A /* Products */,
 				8C0257FCF689228366A7F3675E504800 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+		D3BF10E659FAF62D453A2842239D9C7E /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				C0834CEBB1379A84116EF29F93051C60 /* iOS */,
+				834C9319CBF30B202416FC66D3C49878 /* LICENSE */,
+				C39C896F6681474233A7600E7AC31BE7 /* README.md */,
+				16DD963171A190121C1B1F5D2632E481 /* SwipeableCardStack.podspec */,
 			);
-			name = Frameworks;
+			name = Pod;
 			sourceTree = "<group>";
 		};
-		EA97308A54E8385BFA366CFABF7D5DC5 /* Development Pods */ = {
+		E2983683FD097A93297E2F5D4E382B36 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				F825668C11AD5DC7841F0F7C43BE8F21 /* SwipeableCardStack */,
+				436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */,
+				312B988EF117AE4DE76A268D970131FE /* UIKit.framework */,
 			);
-			name = "Development Pods";
+			name = iOS;
 			sourceTree = "<group>";
 		};
-		F825668C11AD5DC7841F0F7C43BE8F21 /* SwipeableCardStack */ = {
+		F04ECB6D9BC08911E55682DE183D693C /* SwipeableCardStack */ = {
 			isa = PBXGroup;
 			children = (
-				B9772C1124B1F6A600AC5344 /* CardView.swift */,
-				B9772C1024B1F6A600AC5344 /* SelectedView.swift */,
-				B9772C1224B1F6A600AC5344 /* StackView.swift */,
-				3A90A10DC118452EE06E7D2272650ED0 /* Pod */,
-				31B473B458A9DD18E3FD8E7A72E9E69A /* Support Files */,
+				DCCE56725F1B866B4BC25E1143B58BC6 /* CardView.swift */,
+				8AE2C7DAC16DB2B2DC2E092A23B32313 /* SelectedView.swift */,
+				638B069968D587F49F4E581DC459B01F /* StackView.swift */,
+				D3BF10E659FAF62D453A2842239D9C7E /* Pod */,
+				63A9B075E9148B55100A71859F356E1B /* Support Files */,
 			);
 			name = SwipeableCardStack;
 			path = ../..;
@@ -240,11 +244,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2F85A4536AEDE76DF48935D5248C11E5 /* Headers */ = {
+		ECE4BDE7168A72CCAF91C6ECF8E67AC9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51FECAAA171A39CAA357F7B171C5C945 /* SwipeableCardStack-umbrella.h in Headers */,
+				D75750BBC3A75C6E097D27DFE7A7C247 /* SwipeableCardStack-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +275,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				22047629F07D9B0FA1B2D67E08AEA8D6 /* PBXTargetDependency */,
+				14083FD7172BF0036645EEFB251254C5 /* PBXTargetDependency */,
 			);
 			name = "Pods-SwipeableCardStack_Tests";
 			productName = "Pods-SwipeableCardStack_Tests";
@@ -280,12 +284,12 @@
 		};
 		3A3F8DD082340FD17EAA18BCA34DAFA3 /* SwipeableCardStack */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A84B36C5AF4324BAA91C1385BB96EA1 /* Build configuration list for PBXNativeTarget "SwipeableCardStack" */;
+			buildConfigurationList = 379490BBE4BC20750041E3879F91C548 /* Build configuration list for PBXNativeTarget "SwipeableCardStack" */;
 			buildPhases = (
-				2F85A4536AEDE76DF48935D5248C11E5 /* Headers */,
-				3E7DA29769BE70926963CD192BA41D42 /* Sources */,
-				B0FB60ACC6F0F636B3655F5954C77425 /* Frameworks */,
-				9C83DF8CAE07E525498751751F1E7645 /* Resources */,
+				ECE4BDE7168A72CCAF91C6ECF8E67AC9 /* Headers */,
+				D50A3D54890AD97F3B3C878C5E762C6A /* Sources */,
+				7B2971B53CB898CE0BD2B96F2C055117 /* Frameworks */,
+				1F60A3F4B17B1E10DA133FC4C9C39982 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -308,7 +312,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				694404F049B8A5E506E544D1090AC09F /* PBXTargetDependency */,
+				9490E2397802661F410D4662F294F514 /* PBXTargetDependency */,
 			);
 			name = "Pods-SwipeableCardStack_Example";
 			productName = "Pods-SwipeableCardStack_Example";
@@ -350,14 +354,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5F6296B2D66B4B0714CAEF49C32FB53B /* Resources */ = {
+		1F60A3F4B17B1E10DA133FC4C9C39982 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9C83DF8CAE07E525498751751F1E7645 /* Resources */ = {
+		5F6296B2D66B4B0714CAEF49C32FB53B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -374,17 +378,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3E7DA29769BE70926963CD192BA41D42 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0ACE4E1621051D2FAA39B7F9B107798E /* SwipeableCardStack-dummy.m in Sources */,
-				B9772C1424B1F6A700AC5344 /* CardView.swift in Sources */,
-				B9772C1324B1F6A700AC5344 /* SelectedView.swift in Sources */,
-				B9772C1524B1F6A700AC5344 /* StackView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		824E69DE969A4A9E98FA3F86D9A870D0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -401,58 +394,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D50A3D54890AD97F3B3C878C5E762C6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BC306AE35A540D7D520221560204514 /* CardView.swift in Sources */,
+				DD53610ACBADE2FB62A0DFD102477FBA /* SelectedView.swift in Sources */,
+				F3B40AC33601D71E95402D3459A4C876 /* StackView.swift in Sources */,
+				CA05C480C49EFF7F735413F96AF77C8E /* SwipeableCardStack-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		22047629F07D9B0FA1B2D67E08AEA8D6 /* PBXTargetDependency */ = {
+		14083FD7172BF0036645EEFB251254C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-SwipeableCardStack_Example";
 			target = C2D4A45627BCA1AD57241514778964B2 /* Pods-SwipeableCardStack_Example */;
-			targetProxy = 2B5EE300592F8B77C579A16C9E08E730 /* PBXContainerItemProxy */;
+			targetProxy = C0A022EAABF7A6AA77AB23EE7DB5EF84 /* PBXContainerItemProxy */;
 		};
-		694404F049B8A5E506E544D1090AC09F /* PBXTargetDependency */ = {
+		9490E2397802661F410D4662F294F514 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwipeableCardStack;
 			target = 3A3F8DD082340FD17EAA18BCA34DAFA3 /* SwipeableCardStack */;
-			targetProxy = CC97AE33824DABEEE8742AE33492EA7C /* PBXContainerItemProxy */;
+			targetProxy = 8167EAE0172A733039EBE3FAA22D0E95 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1D6AF17819AD99979D998DA1BEE83FAC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 40231D5E848D6E13BB1DDAA6928E0317 /* SwipeableCardStack.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SwipeableCardStack/SwipeableCardStack-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwipeableCardStack/SwipeableCardStack-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwipeableCardStack/SwipeableCardStack.modulemap";
-				PRODUCT_MODULE_NAME = SwipeableCardStack;
-				PRODUCT_NAME = SwipeableCardStack;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		25ED791AEAB1DFC3C12321A26516D5C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E2DE6BF46B39642641433187ED209511 /* Pods-SwipeableCardStack_Tests.debug.xcconfig */;
@@ -480,7 +450,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -514,18 +483,16 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		5069E2E28515B89CACB7994C0CF5B62D /* Release */ = {
+		2F26E6D888694B9E32B727ACAFE78CAB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C37A5B80EC4AB7A27BFB09A12486502E /* SwipeableCardStack.release.xcconfig */;
+			baseConfigurationReference = 3BCB5DFC1E59276E7CC6A31CE24A65A4 /* SwipeableCardStack.debug.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -538,22 +505,20 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SwipeableCardStack/SwipeableCardStack-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SwipeableCardStack/SwipeableCardStack-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SwipeableCardStack/SwipeableCardStack.modulemap";
 				PRODUCT_MODULE_NAME = SwipeableCardStack;
 				PRODUCT_NAME = SwipeableCardStack;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		5A278530197A9C840197253194C01B7A /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -582,7 +547,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -617,7 +581,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -748,23 +711,55 @@
 			};
 			name = Debug;
 		};
+		E6E5BC088EB3F6F2C51AB1AF7F1ACBAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7180C92C731505585EE847E73605A3B /* SwipeableCardStack.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwipeableCardStack/SwipeableCardStack-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwipeableCardStack/SwipeableCardStack-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwipeableCardStack/SwipeableCardStack.modulemap";
+				PRODUCT_MODULE_NAME = SwipeableCardStack;
+				PRODUCT_NAME = SwipeableCardStack;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1A84B36C5AF4324BAA91C1385BB96EA1 /* Build configuration list for PBXNativeTarget "SwipeableCardStack" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1D6AF17819AD99979D998DA1BEE83FAC /* Debug */,
-				5069E2E28515B89CACB7994C0CF5B62D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2485F03BA2A736491DE160452D00FF42 /* Build configuration list for PBXNativeTarget "Pods-SwipeableCardStack_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				25ED791AEAB1DFC3C12321A26516D5C6 /* Debug */,
 				5A278530197A9C840197253194C01B7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		379490BBE4BC20750041E3879F91C548 /* Build configuration list for PBXNativeTarget "SwipeableCardStack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F26E6D888694B9E32B727ACAFE78CAB /* Debug */,
+				E6E5BC088EB3F6F2C51AB1AF7F1ACBAF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

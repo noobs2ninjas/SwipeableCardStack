@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SwipeableCardStack: 7fa3e5d404de90cb97dbfb41f83c9652622e89cd
+  SwipeableCardStack: 4dce5ccb623832d83fbd67cf7f49c70cb6b958f4
 
 PODFILE CHECKSUM: 8eb76f2d60c3410bae2ddc204ba2a8fbf911bbc5
 
