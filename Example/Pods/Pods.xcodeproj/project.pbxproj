@@ -19,7 +19,7 @@
 		CE7E330B399933201B25771EA87E9BCD /* Pods-SwipeableCardStack_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0681102FDB38E7A60E837847ABB4E803 /* Pods-SwipeableCardStack_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D75750BBC3A75C6E097D27DFE7A7C247 /* SwipeableCardStack-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFC30031E55094C7F4EF06E2CE75BF6 /* SwipeableCardStack-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DD53610ACBADE2FB62A0DFD102477FBA /* SelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE2C7DAC16DB2B2DC2E092A23B32313 /* SelectedView.swift */; };
-		F3B40AC33601D71E95402D3459A4C876 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B069968D587F49F4E581DC459B01F /* StackView.swift */; };
+		F3B40AC33601D71E95402D3459A4C876 /* CardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638B069968D587F49F4E581DC459B01F /* CardStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +43,7 @@
 		0681102FDB38E7A60E837847ABB4E803 /* Pods-SwipeableCardStack_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwipeableCardStack_Tests-umbrella.h"; sourceTree = "<group>"; };
 		090914CF226698D707C4D89E4588E67F /* Pods-SwipeableCardStack_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwipeableCardStack_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		0AFC30031E55094C7F4EF06E2CE75BF6 /* SwipeableCardStack-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwipeableCardStack-umbrella.h"; sourceTree = "<group>"; };
-		16DD963171A190121C1B1F5D2632E481 /* SwipeableCardStack.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = SwipeableCardStack.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		16DD963171A190121C1B1F5D2632E481 /* SwipeableCardStack.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = SwipeableCardStack.podspec; sourceTree = "<group>"; tabWidth = 2; };
 		1804A40C5F72C4CD3076404D9FD58F40 /* Pods-SwipeableCardStack_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwipeableCardStack_Example-umbrella.h"; sourceTree = "<group>"; };
 		181BC249FA348B84C9B73038123C1883 /* Pods-SwipeableCardStack_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SwipeableCardStack_Tests.modulemap"; sourceTree = "<group>"; };
 		312B988EF117AE4DE76A268D970131FE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -53,7 +53,7 @@
 		436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		4C3D6087D8718D18ECF34AAF233C1B5F /* Pods-SwipeableCardStack_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwipeableCardStack_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		62CC49ACE3202F34EF896CF4EEC2582D /* Pods-SwipeableCardStack_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwipeableCardStack_Example-dummy.m"; sourceTree = "<group>"; };
-		638B069968D587F49F4E581DC459B01F /* StackView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StackView.swift; path = SwipeableCardStack/Classes/StackView.swift; sourceTree = "<group>"; };
+		638B069968D587F49F4E581DC459B01F /* CardStack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CardStack.swift; path = SwipeableCardStack/Classes/CardStack.swift; sourceTree = "<group>"; };
 		6FCA45306EEC537F5C7CA872C0566DEF /* SwipeableCardStack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwipeableCardStack-prefix.pch"; sourceTree = "<group>"; };
 		7B84A7A900BE994281D4D6678F76344E /* Pods-SwipeableCardStack_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwipeableCardStack_Example-Info.plist"; sourceTree = "<group>"; };
 		834C9319CBF30B202416FC66D3C49878 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 			children = (
 				DCCE56725F1B866B4BC25E1143B58BC6 /* CardView.swift */,
 				8AE2C7DAC16DB2B2DC2E092A23B32313 /* SelectedView.swift */,
-				638B069968D587F49F4E581DC459B01F /* StackView.swift */,
+				638B069968D587F49F4E581DC459B01F /* CardStack.swift */,
 				D3BF10E659FAF62D453A2842239D9C7E /* Pod */,
 				63A9B075E9148B55100A71859F356E1B /* Support Files */,
 			);
@@ -400,7 +400,7 @@
 			files = (
 				9BC306AE35A540D7D520221560204514 /* CardView.swift in Sources */,
 				DD53610ACBADE2FB62A0DFD102477FBA /* SelectedView.swift in Sources */,
-				F3B40AC33601D71E95402D3459A4C876 /* StackView.swift in Sources */,
+				F3B40AC33601D71E95402D3459A4C876 /* CardStack.swift in Sources */,
 				CA05C480C49EFF7F735413F96AF77C8E /* SwipeableCardStack-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

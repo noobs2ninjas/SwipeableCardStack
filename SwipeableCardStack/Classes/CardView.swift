@@ -214,7 +214,7 @@ open class CardView: UIView {
         }
     }
 
-    //Mark: Behavior Functions
+    //MARK: Behavior Functions
     fileprivate func addAttachmentBehavior(withOffset offset: UIOffset, andAnchor anchor: CGPoint){
         attachmentBehavior = UIAttachmentBehavior(item: self, offsetFromCenter: offset, attachedToAnchor: anchor)
         attachmentBehavior?.action = {
@@ -280,7 +280,7 @@ open class CardView: UIView {
         return dynamicBehavior
     }
 
-    //Mark: Gesture calculation functions
+    // MARK: Gesture calculation functions
     fileprivate func distance(a: CGPoint, b: CGPoint) -> CGFloat {
         let xDist = a.x - b.x
         let yDist = a.y - b.y
@@ -291,7 +291,7 @@ open class CardView: UIView {
         return atan2(Float(view.transform.b), Float(view.transform.a))
     }
 
-    //Mark: view and behavior management functions
+    // MARK: view and behavior management functions
     open func checkAndRemoveBehaviors(){
         if snapBehavior != nil{
             animatorDelegate.removeBehavior(snapBehavior!)

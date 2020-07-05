@@ -8,27 +8,29 @@
 
 import UIKit
 
-public protocol StackViewDelegate: AnyObject {
-    func cardWasSwiped(_ card: CardView, onStackView stackView: StackView)
+// MARK: Card Stack Delegate
+public protocol CardStackDelegate: AnyObject {
+    func cardWasSwiped(_ card: CardView, onCardStack CardStack: CardStack)
     func cardWasTapped(_ card: CardView)
-    func shouldReloadEmptyStackView(_ stackView: StackView) -> Bool
-    func shouldDragCard(_ card:CardView, onStackView stackView: StackView) -> Bool
-    func cardDidShow(_ card: CardView, onStackView stackView: StackView)
-    func dragEndedOnCard(_ card: CardView, onStackView stackView: StackView)
+    func shouldReloadEmptyCardStack(_ CardStack: CardStack) -> Bool
+    func shouldDragCard(_ card:CardView, onCardStack CardStack: CardStack) -> Bool
+    func cardDidShow(_ card: CardView, onCardStack CardStack: CardStack)
+    func dragEndedOnCard(_ card: CardView, onCardStack CardStack: CardStack)
 }
 
-public extension StackViewDelegate {
-    func cardWasSwiped(_ card: CardView, onStackView stackView: StackView) {}
+public extension CardStackDelegate {
+    func cardWasSwiped(_ card: CardView, onCardStack CardStack: CardStack) {}
     func cardWasTapped(_ card: CardView) {}
-    func shouldReloadEmptyStackView(_ stackView: StackView) -> Bool { return true }
-    func shouldDragCard(_ card:CardView, onStackView stackView: StackView) -> Bool { return true }
-    func cardDidShow(_ card: CardView, onStackView stackView: StackView) {}
-    func dragEndedOnCard(_ card: CardView, onStackView stackView: StackView) {}
+    func shouldReloadEmptyCardStack(_ CardStack: CardStack) -> Bool { return true }
+    func shouldDragCard(_ card:CardView, onCardStack CardStack: CardStack) -> Bool { return true }
+    func cardDidShow(_ card: CardView, onCardStack CardStack: CardStack) {}
+    func dragEndedOnCard(_ card: CardView, onCardStack CardStack: CardStack) {}
 }
 
-open class StackView: UIView {
+// MARK: CardStack Class
+open class CardStack: UIView {
 
-    public var delegate: StackViewDelegate!
+    public var delegate: CardStackDelegate!
     
     public private(set) var index: Int!
     public private(set) var isSelected = false
@@ -225,25 +227,26 @@ open class StackView: UIView {
     }
 }
 
-extension StackView: CardViewDelegate {
+// MARK: CardViewDelegate
+extension CardStack: CardViewDelegate {
 
     public func dragEndedOnCard(_ card: CardView) {
-        delegate.dragEndedOnCard(card, onStackView: self)
+        delegate.dragEndedOnCard(card, onCardStack: self)
     }
 
     public func cardWasSwiped(_ card: CardView) {
         if !card.isOriginal { originalArray.removeFirst() }
-        else { delegate.cardWasSwiped(card, onStackView: self) }
+        else { delegate.cardWasSwiped(card, onCardStack: self) }
 
         currentArray.removeFirst()
 
         print(currentArray.count)
         if currentArray.isEmpty{
-            if delegate.shouldReloadEmptyStackView(self) {
+            if delegate.shouldReloadEmptyCardStack(self) {
                 reloadStack(true)
             }
         } else {
-            delegate.cardDidShow(currentArray.first!, onStackView: self)
+            delegate.cardDidShow(currentArray.first!, onCardStack: self)
             currentArray.first!.isUserInteractionEnabled = true
         }
 
@@ -272,11 +275,12 @@ extension StackView: CardViewDelegate {
     }
 
     public func shouldDragCard(_ card: CardView) -> Bool {
-        return delegate.shouldDragCard(card, onStackView: self)
+        return delegate.shouldDragCard(card, onCardStack: self)
     }
 }
 
-extension StackView: AnimatorDelegate {
+// MARK: AnimatorDelegate Functions
+extension CardStack: AnimatorDelegate {
 
     public func addGravity(toCard card: CardView) {
         gravityBehavior.addItem(card)
