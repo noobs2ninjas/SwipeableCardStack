@@ -1,0 +1,22 @@
+{
+  "name": "SwipeableCardStack",
+  "version": "0.1.0",
+  "summary": "A short description of SwipeableCardStack.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/noobs2ninjas/SwipeableCardStack",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "noobs2ninjas": "nathankellert@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/noobs2ninjas/SwipeableCardStack.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "SwipeableCardStack/Classes/**/*"
+}

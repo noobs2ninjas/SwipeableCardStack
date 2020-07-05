@@ -1,0 +1,6 @@
+framework module SwipeableCardStack {
+  umbrella header "SwipeableCardStack-umbrella.h"
+
+  export *
+  module * { export * }
+}
