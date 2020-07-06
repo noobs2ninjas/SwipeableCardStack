@@ -51,7 +51,9 @@ open class CardStack: UIView {
     fileprivate lazy var gravityBehavior: UIGravityBehavior = {
         let newGavityBehavior = UIGravityBehavior(items: [])
         newGavityBehavior.magnitude = 3
-        self.animator.addBehavior(newGavityBehavior)
+        
+        animator.addBehavior(newGavityBehavior)
+        
         return newGavityBehavior
     }()
 
@@ -59,8 +61,8 @@ open class CardStack: UIView {
     public init(frame: CGRect, cardArray: [CardView]?) {
         super.init(frame: frame)
         if cardArray != nil {
-            self.originalArray = setupCards(inArray: cardArray!)
-            self.currentArray = originalArray
+            originalArray = setupCards(inArray: cardArray!)
+            currentArray = originalArray
         }
     }
     
@@ -68,7 +70,7 @@ open class CardStack: UIView {
         super.init(coder: aDecoder)
     }
 
-    fileprivate func snapCards(inCardArray cardArray: [CardView], withCompletion completion: @escaping (()->Void)) {
+    fileprivate func snapCards(inCardArray cardArray: [CardView], withCompletion completion: @escaping ()->Void) {
         var cardsCompleted = 0
         for card in cardArray {
 
@@ -86,45 +88,55 @@ open class CardStack: UIView {
 
     // MARK: Card Loading
     private func loadCards(_ animated: Bool) {
-        if animated { self.alpha = 0 }
-        if currentArray.count == 0 { return }
-        for index in 0...(currentArray.count - 1) {
-            let card = currentArray[index]
+        if animated {
+            self.alpha = 0
+        }
+        
+        if currentArray.count == 0 {
+            return
+        }
+        
+        for (index, card) in currentArray.enumerated() {
             card.delegate = self
             let isTop = index == 0
-            card.isUserInteractionEnabled = isTop
+            card.isUserInteractionEnabled = index == 0
             isTop ? addSubview(card) : insertSubview(card, belowSubview: currentArray[index - 1])
         }
 
-        if animated {
-            self.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
-
-            UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveEaseIn, animations: {
-                self.transform = CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
-                self.alpha = 1
-            }, completion: { (completed) in
-                for card in self.currentArray {
-                    card.finishSetup()
-                    self.isUserInteractionEnabled = true
-                }
-
-                self.isAnimating = false
-
-                if let newCards = self.waitingCards, !newCards.isEmpty {
-                    self.waitingCards = nil
-                    self.loadCards(withCardArray: newCards, animated: true)
-                }
-                
-            })
+        if !animated {
+            return
         }
+        
+        transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+
+        UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveEaseIn, animations: {
+            
+            self.transform = CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
+            self.alpha = 1
+        }, completion: { (completed) in
+            for card in self.currentArray {
+                card.finishSetup()
+                self.isUserInteractionEnabled = true
+            }
+            
+            self.isAnimating = false
+
+            if let newCards = self.waitingCards, !newCards.isEmpty {
+                self.waitingCards = nil
+                self.loadCards(withCardArray: newCards, animated: true)
+            }
+            
+        })
+        
     }
 
     fileprivate func setupCards(inArray cardArray: [CardView]) -> [CardView]{
-        for card in cardArray{
+        for card in cardArray {
             card.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
             card.animatorDelegate = self
             card.delegate = self
         }
+        
         return cardArray
     }
 
@@ -132,8 +144,8 @@ open class CardStack: UIView {
 
         if shouldReset && !isAnimating {
             isAnimating = true
-            self.isUserInteractionEnabled = false
-            self.alpha = 0
+            isUserInteractionEnabled = false
+            alpha = 0
             var snapArray = [CardView]()
             for card in currentArray {
                 card.animatorDelegate = self
@@ -148,13 +160,13 @@ open class CardStack: UIView {
                 }
             } else {
                 isAnimating = true
-                self.loadCards(true)
+                loadCards(true)
             }
             
             shouldReset = false
         } else if shouldLoad {
             isAnimating = true
-            self.loadCards(true)
+            loadCards(true)
         }
         super.layoutSubviews()
     }
@@ -274,7 +286,7 @@ extension CardStack: CardViewDelegate {
 
             RunLoop.main.add(timer, forMode: RunLoop.Mode.default)
         }
-
+        
         delegate.cardWasTapped(card)
     }
 

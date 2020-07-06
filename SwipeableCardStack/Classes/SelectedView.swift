@@ -33,7 +33,8 @@ class SelectedView: UIView {
         
         updateMaskForView(imageView: backgroundImage, image: image, color: color)
     }
-
+    
+    // MARK: Create Mask
     func updateMaskForView(imageView: UIImageView, image: UIImage?, color: UIColor?) {
         
         UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, true, 0)
@@ -61,7 +62,15 @@ class SelectedView: UIView {
         let width = cgimage!.width
         let height = cgimage!.height
         let bitsPerComponent = cgimage!.bitsPerComponent
-        let mask = CGImage(maskWidth: width, height: height, bitsPerComponent: bitsPerComponent, bitsPerPixel: bitsPerPixel, bytesPerRow: bytesPerRow, provider: dataProvider!, decode: nil, shouldInterpolate: false)
+        
+        let mask = CGImage(maskWidth: width,
+                           height: height,
+                           bitsPerComponent: bitsPerComponent,
+                           bitsPerPixel: bitsPerPixel,
+                           bytesPerRow: bytesPerRow,
+                           provider: dataProvider!,
+                           decode: nil,
+                           shouldInterpolate: false)
 
         // create background
 

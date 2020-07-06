@@ -76,6 +76,7 @@ open class CardView: UIView {
 
     public init(view: UIView) {
         super.init(frame: CGRect.zero)
+        
         setup()
         addSubview(view);
 
@@ -89,22 +90,25 @@ open class CardView: UIView {
         NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0).isActive = true
         NSLayoutConstraint(item: view, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0).isActive = true
     }
-
+    
+    // Remove behaviors and gesture recognizers when deinitializing to avoid leaks
     deinit {
+        
         if snapBehavior != nil {
             animatorDelegate.removeBehavior(snapBehavior!)
-            snapBehavior = nil
         }
 
         if attachmentBehavior != nil {
             animatorDelegate.removeBehavior(attachmentBehavior!)
-            attachmentBehavior = nil
         }
 
         if dynamicItemBehavior != nil {
             animatorDelegate.removeBehavior(dynamicItemBehavior!)
-            dynamicItemBehavior = nil
         }
+        
+        snapBehavior = nil
+        attachmentBehavior = nil
+        dynamicItemBehavior = nil
 
         gestureRecognizers?.removeAll()
     }
@@ -125,9 +129,6 @@ open class CardView: UIView {
         addGestureRecognizer(panGestureRecognizer)
         snapshotReady()
     }
-
-    //MARK: Configurations
-    var shouldHighlight = true
 
     //MARK: GestureRecognizers
     @objc func tapRecognized(_ recogznier: UITapGestureRecognizer) {
@@ -340,6 +341,7 @@ open class CardView: UIView {
     }
 }
 
+// MARK: UIGestureRecognizerDelegate
 extension CardView: UIGestureRecognizerDelegate {
 
     // Make recognizer play nice with UIControls
@@ -347,8 +349,8 @@ extension CardView: UIGestureRecognizerDelegate {
         return !(touch.view is UIControl)
     }
 
-    //Make recognizer play nice with other gestures accept for edge pan gestures.
-    //We need that space
+    // Make recognizer play nice with other gestures accept for edge pan gestures.
+    // We need that space
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         let shouldFail = (gestureRecognizer is UIPanGestureRecognizer && otherGestureRecognizer is UIScreenEdgePanGestureRecognizer)
         return shouldFail
