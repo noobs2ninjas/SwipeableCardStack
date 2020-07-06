@@ -35,17 +35,15 @@ open class CardStack: UIView {
     public private(set) var index: Int!
     public private(set) var isSelected = false
     public private(set) var cardSelected: CardView?
+    private(set) var isAnimating = false
 
     fileprivate var originalArray = [CardView]()
     fileprivate var currentArray = [CardView]()
     fileprivate var shouldReset = false
     fileprivate var waitingCards: [CardView]?
-    fileprivate var isAnimating = false
     fileprivate var shouldLoad = false
-
-
+    
     // MARK: Gravity Behavior Functions
-
     fileprivate lazy var animator: UIDynamicAnimator =  {
         return UIDynamicAnimator(referenceView: superview ?? self)
     }()
@@ -65,7 +63,7 @@ open class CardStack: UIView {
             self.currentArray = originalArray
         }
     }
-
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -105,7 +103,7 @@ open class CardStack: UIView {
                 self.transform = CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
                 self.alpha = 1
             }, completion: { (completed) in
-                for card in self.currentArray{
+                for card in self.currentArray {
                     card.finishSetup()
                     self.isUserInteractionEnabled = true
                 }
@@ -113,12 +111,10 @@ open class CardStack: UIView {
                 self.isAnimating = false
 
                 if let newCards = self.waitingCards, !newCards.isEmpty {
-                    self.waitingCards?.removeAll()
                     self.waitingCards = nil
                     self.loadCards(withCardArray: newCards, animated: true)
-
                 }
-
+                
             })
         }
     }
@@ -147,16 +143,16 @@ open class CardStack: UIView {
             }
 
             if snapArray.count > 0 {
-                snapCards(inCardArray: snapArray, withCompletion: {
+                snapCards(inCardArray: snapArray) {
                     self.loadCards(true)
-                })
-            }else{
+                }
+            } else {
                 isAnimating = true
                 self.loadCards(true)
             }
-
+            
             shouldReset = false
-        }else if shouldLoad {
+        } else if shouldLoad {
             isAnimating = true
             self.loadCards(true)
         }
@@ -178,18 +174,22 @@ open class CardStack: UIView {
     }
 
     open func loadCards(withCardArray cardArray: [CardView], animated: Bool) {
-        if !isAnimating {
-            if !originalArray.isEmpty {
-                clear()
-                originalArray.removeAll()
-            }
-            originalArray = setupCards(inArray: cardArray)
-            currentArray = originalArray
-            isAnimating = true
-            loadCards(true)
-        } else {
+        
+        if isAnimating {
             waitingCards = cardArray
+            return
         }
+        
+        if !originalArray.isEmpty {
+            clear()
+            originalArray.removeAll()
+        }
+        
+        originalArray = setupCards(inArray: cardArray)
+        currentArray = originalArray
+        isAnimating = true
+        loadCards(true)
+        
     }
 
     open func addCard(_ card: CardView) {
@@ -198,12 +198,15 @@ open class CardStack: UIView {
         isUserInteractionEnabled = false
 
         //Find the last card and disable user interaction so we can add the card at the back.
-        if let card = currentArray.last { card.isUserInteractionEnabled = false }
+        if let card = currentArray.last {
+            card.isUserInteractionEnabled = false
+        }
+        
         originalArray.insert(card, at: 0)
         currentArray.insert(card, at: 0)
 
         //TODO: in the future allow adding of cards to original array
-        //mark card as not original so it can be removed from the original array when swiped
+        // Mark card as not original so it can be removed from the original array when swiped
         card.isOriginal = false
 
         // TODO: Allow maintaining of users frame
@@ -235,16 +238,17 @@ extension CardStack: CardViewDelegate {
     }
 
     public func cardWasSwiped(_ card: CardView) {
-        if !card.isOriginal { originalArray.removeFirst() }
-        else { delegate.cardWasSwiped(card, onCardStack: self) }
+        
+        if !card.isOriginal {
+            originalArray.removeFirst()
+        } else {
+            delegate.cardWasSwiped(card, onCardStack: self)
+        }
 
         currentArray.removeFirst()
-
-        print(currentArray.count)
-        if currentArray.isEmpty{
-            if delegate.shouldReloadEmptyCardStack(self) {
-                reloadStack(true)
-            }
+        
+        if currentArray.isEmpty && delegate.shouldReloadEmptyCardStack(self) {
+            reloadStack(true)
         } else {
             delegate.cardDidShow(currentArray.first!, onCardStack: self)
             currentArray.first!.isUserInteractionEnabled = true
@@ -254,14 +258,14 @@ extension CardStack: CardViewDelegate {
     }
 
     @objc func unselectCard(_ timer: Timer) {
-        if cardSelected != nil { cardSelected = nil }
+        cardSelected = nil
         timer.invalidate()
     }
 
     public func cardWasTapped(_ card: CardView, shouldHighlight: Bool) {
 
         // TODO: Add tap effect
-        if shouldHighlight && cardSelected == nil{
+        if shouldHighlight && cardSelected == nil {
             //let selectedData = stackDelegate.selectedProperties()
             //card.setSelected(true, withImage: selectedData.image, andColor: selectedData.color, andTime: 0.2)
             cardSelected = card

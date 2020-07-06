@@ -16,8 +16,10 @@ class SelectedView: UIView {
 
     init(frame: CGRect, image: UIImage?, color: UIColor?){
         super.init(frame:frame)
+        
         self.image = image
         self.color = color
+        
         backgroundImage = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         addSubview(backgroundImage)
     }
@@ -33,20 +35,19 @@ class SelectedView: UIView {
     }
 
     func updateMaskForView(imageView: UIImageView, image: UIImage?, color: UIColor?) {
+        
         UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, true, 0)
+        
         let context = UIGraphicsGetCurrentContext()
-
         context!.scaleBy(x: 1, y: -1);
         context!.translateBy(x: 0, y: -imageView.bounds.size.height);
 
         // draw rounded rectange inset of the button's entire dimensions
-
         UIColor.white.setStroke()
         let rect = imageView.bounds.insetBy(dx: 10, dy: 10)
         let path = UIBezierPath(roundedRect: rect, cornerRadius: 5)
         path.lineWidth = 4
         path.stroke()
-
 
         let imageContext = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -81,7 +82,5 @@ class SelectedView: UIView {
         addSubview(logoView)
 
         backgroundImage.image = background
-
-
     }
 }

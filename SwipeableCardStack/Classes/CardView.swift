@@ -72,7 +72,6 @@ open class CardView: UIView {
 
         //Add constraints to view if user chooses to use CardView as a container
         addConstraints(toView: view)
-
     }
 
     public init(view: UIView) {
@@ -108,7 +107,6 @@ open class CardView: UIView {
         }
 
         gestureRecognizers?.removeAll()
-
     }
 
     private func setup() {
@@ -129,9 +127,7 @@ open class CardView: UIView {
     }
 
     //MARK: Configurations
-    open func shouldHighlight() -> Bool {
-        return true
-    }
+    var shouldHighlight = true
 
     //MARK: GestureRecognizers
     @objc func tapRecognized(_ recogznier: UITapGestureRecognizer) {
@@ -142,54 +138,60 @@ open class CardView: UIView {
 
         switch gesture.state {
         case .began:
-            if !delegate.shouldDragCard(self) { break }
-                self.originalFrame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
-                willBeginDrag()
+            if !delegate.shouldDragCard(self) {
+                break
+            }
+            
+            self.originalFrame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+            
+            willBeginDrag()
 
-                applyPlainShadow()
-                if initialCenter == nil{
-                    initialCenter = superview!.center
-                }
+            applyPlainShadow()
+        
+            if initialCenter == nil {
+                initialCenter = superview!.center
+            }
 
-                checkAndRemoveBehaviors()
+            checkAndRemoveBehaviors()
 
-                //Find where finger is on card and apply that offset as we compare card to superview.
-                let point = gesture.location(in: self)
-                let offset = UIOffset(horizontal: CGFloat(point.x - frame.width/2),
-                                      vertical: CGFloat(point.y - frame.height/2))
+            //Find where finger is on card and apply that offset as we compare card to superview.
+            let point = gesture.location(in: self)
+            let offset = UIOffset(horizontal: CGFloat(point.x - frame.width/2),
+                                  vertical: CGFloat(point.y - frame.height/2))
 
-                let anchor: CGPoint = gesture.location(in: superview!.superview!)
+            let anchor: CGPoint = gesture.location(in: superview!.superview!)
 
-                //this is used for velocity and to give clean predictable angles
-                lastTime = CFAbsoluteTimeGetCurrent()
-                lastAngle = angleOfView(self)
+            //this is used for velocity and to give clean predictable angles
+            lastTime = CFAbsoluteTimeGetCurrent()
+            lastAngle = angleOfView(self)
 
-                addAttachmentBehavior(withOffset: offset, andAnchor: anchor)
+            addAttachmentBehavior(withOffset: offset, andAnchor: anchor)
             break
         case .changed:
-
+            
             let anchorPoint = gesture.location(in: superview!.superview!)
             attachmentBehavior!.anchorPoint = anchorPoint
-
             break
         case .ended:
 
             let velocity: CGPoint = gesture.velocity(in: superview!.superview)
             let scalarVelocity: Float = sqrtf(Float((velocity.x * velocity.x) + (velocity.y * velocity.y)))
+            
             // If scalarVelocity is not enough we just snap it back
             if scalarVelocity < 300 {
                 addSnapBehavior(toPoint: initialCenter!)
-            } else {
-                //Fling card off by applying gravity and force behaviors.
-                animatorDelegate.removeBehavior(attachmentBehavior!)
-                gesture.isEnabled = false
-                dynamicItemBehavior = getDynamicBehavior(withVelocity: velocity)
-                animatorDelegate.addBehavior(dynamicItemBehavior!)
-                animatorDelegate.addGravity(toCard: self)
+                break
             }
+            
+            //Fling card off by applying gravity and force behaviors.
+            animatorDelegate.removeBehavior(attachmentBehavior!)
+            gesture.isEnabled = false
+            dynamicItemBehavior = getDynamicBehavior(withVelocity: velocity)
+            animatorDelegate.addBehavior(dynamicItemBehavior!)
+            animatorDelegate.addGravity(toCard: self)
+            
             break
-        default :
-            break
+        default: break
         }
     }
 
@@ -232,24 +234,27 @@ open class CardView: UIView {
     }
 
     public func addSnapBehavior(toPoint point: CGPoint, completion: (()->Void)? = nil){
-        if attachmentBehavior != nil{
+        
+        if attachmentBehavior != nil {
             animatorDelegate.removeBehavior(attachmentBehavior!)
         }
+        
         panGestureRecognizer.isEnabled = false
         snapBehavior = UISnapBehavior(item: self, snapTo: point)
         animatorDelegate?.addBehavior(snapBehavior!)
         animatorDelegate.removeGravity(fromCard: self)
         snapBehavior?.action = {
-            if let view = self.superview?.superview, self.snapBehavior != nil{
+            if let view = self.superview?.superview, self.snapBehavior != nil {
                 let center: CGPoint = self.convert(self.center, to: view)
+                
                 if self.distance(a: point, b: center) <= 0.499 {
-
                     self.animatorDelegate.removeBehavior(self.snapBehavior!)
                     self.panGestureRecognizer.isEnabled = true
                     self.layer.shadowColor = UIColor.clear.cgColor
                     self.didEndDrag()
                     completion?()
                 }
+                
             }else{
                 self.checkAndRemoveBehaviors()
                 self.snapBehavior = nil
@@ -291,7 +296,7 @@ open class CardView: UIView {
         return atan2(Float(view.transform.b), Float(view.transform.a))
     }
 
-    // MARK: view and behavior management functions
+    // MARK: Behavior Management
     open func checkAndRemoveBehaviors(){
         if snapBehavior != nil{
             animatorDelegate.removeBehavior(snapBehavior!)
