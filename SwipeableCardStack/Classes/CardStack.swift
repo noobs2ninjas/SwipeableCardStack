@@ -9,7 +9,7 @@
 import UIKit
 
 // MARK: Card Stack Delegate
-public protocol CardStackDelegate: AnyObject {
+public protocol CardStackDelegate {
     func cardWasSwiped(_ card: CardView, onCardStack CardStack: CardStack)
     func cardWasTapped(_ card: CardView)
     func shouldReloadEmptyCardStack(_ CardStack: CardStack) -> Bool

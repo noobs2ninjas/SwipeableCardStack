@@ -5,7 +5,6 @@ target 'SwipeableCardStack_Example' do
 
   target 'SwipeableCardStack_Tests' do
     inherit! :search_paths
-
     
   end
 end

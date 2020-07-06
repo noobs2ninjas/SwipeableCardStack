@@ -50,7 +50,7 @@ open class CardView: UIView {
     internal func didEndDrag(){}
 
 
-    //MARK: Lifecycle
+    // MARK: Lifecycle
     public init() {
         super.init(frame: CGRect.zero)
         setup()
@@ -162,7 +162,7 @@ open class CardView: UIView {
 
             let anchor: CGPoint = gesture.location(in: superview!.superview!)
 
-            //this is used for velocity and to give clean predictable angles
+            // This is used for velocity and to give clean predictable angles
             lastTime = CFAbsoluteTimeGetCurrent()
             lastAngle = angleOfView(self)
 
@@ -197,20 +197,22 @@ open class CardView: UIView {
     }
 
     public func setSelected(_ selected: Bool, withImage image:UIImage?, andColor color: UIColor?, andTime time: TimeInterval){
-        if selected{
-            if selectedView == nil{
+        if selected {
+            if selectedView == nil {
                 selectedView = SelectedView(frame: originalFrame ?? CGRect(x: 0, y: 0, width: frame.width, height: frame.height), image: image, color: color)
                 selectedView!.bounds = selectedView!.frame
                 selectedView?.alpha = 0
             }
             addSubview(selectedView!)
-            UIView.animate(withDuration: time, animations: {
+            
+            UIView.animate(withDuration: time) {
                 self.selectedView?.alpha = 1
-            })
+            }
+            
         } else {
             UIView.animate(withDuration: time, animations: {
                 self.selectedView?.alpha = 0
-            }, completion: { (bool) in
+            }, completion: { (completed) in
                 self.selectedView?.removeFromSuperview()
                 self.selectedView = nil
             })
@@ -218,7 +220,7 @@ open class CardView: UIView {
     }
 
     //MARK: Behavior Functions
-    fileprivate func addAttachmentBehavior(withOffset offset: UIOffset, andAnchor anchor: CGPoint){
+    fileprivate func addAttachmentBehavior(withOffset offset: UIOffset, andAnchor anchor: CGPoint) {
         attachmentBehavior = UIAttachmentBehavior(item: self, offsetFromCenter: offset, attachedToAnchor: anchor)
         attachmentBehavior?.action = {
             let time = CFAbsoluteTimeGetCurrent()
@@ -234,7 +236,7 @@ open class CardView: UIView {
         animatorDelegate.addBehavior(attachmentBehavior!)
     }
 
-    public func addSnapBehavior(toPoint point: CGPoint, completion: (()->Void)? = nil){
+    public func addSnapBehavior(toPoint point: CGPoint, completion: (()->Void)? = nil) {
         
         if attachmentBehavior != nil {
             animatorDelegate.removeBehavior(attachmentBehavior!)
@@ -244,22 +246,24 @@ open class CardView: UIView {
         snapBehavior = UISnapBehavior(item: self, snapTo: point)
         animatorDelegate?.addBehavior(snapBehavior!)
         animatorDelegate.removeGravity(fromCard: self)
+        
         snapBehavior?.action = {
-            if let view = self.superview?.superview, self.snapBehavior != nil {
-                let center: CGPoint = self.convert(self.center, to: view)
-                
-                if self.distance(a: point, b: center) <= 0.499 {
-                    self.animatorDelegate.removeBehavior(self.snapBehavior!)
-                    self.panGestureRecognizer.isEnabled = true
-                    self.layer.shadowColor = UIColor.clear.cgColor
-                    self.didEndDrag()
-                    completion?()
-                }
-                
-            }else{
+            guard let view = self.superview?.superview, self.snapBehavior != nil else {
                 self.checkAndRemoveBehaviors()
                 self.snapBehavior = nil
+                return
             }
+            
+            let center: CGPoint = self.convert(self.center, to: view)
+            
+            if self.distance(a: point, b: center) <= 0.499 {
+                self.animatorDelegate.removeBehavior(self.snapBehavior!)
+                self.panGestureRecognizer.isEnabled = true
+                self.layer.shadowColor = UIColor.clear.cgColor
+                self.didEndDrag()
+                completion?()
+            }
+            
         }
     }
 
@@ -272,15 +276,16 @@ open class CardView: UIView {
         //when dynamic behavior performs an action
         dynamicBehavior.action = {
             //check to see if draggable card is in superview frame
-            if let view = self.superview?.superview?.superview, let rect = self.superview?.convert(self.frame, to: view) {
-                if !rect.intersects(view.frame){
-                    self.checkAndRemoveBehaviors()
-                    self.snapBehavior = nil
-                    self.delegate.cardWasSwiped(self)
-                }
-            }else{
+            guard let view = self.superview?.superview?.superview, let rect = self.superview?.convert(self.frame, to: view) else {
                 self.checkAndRemoveBehaviors()
                 self.snapBehavior = nil
+                return
+            }
+            
+            if !rect.intersects(view.frame){
+                self.checkAndRemoveBehaviors()
+                self.snapBehavior = nil
+                self.delegate.cardWasSwiped(self)
             }
         }
         return dynamicBehavior
@@ -298,7 +303,7 @@ open class CardView: UIView {
     }
 
     // MARK: Behavior Management
-    open func checkAndRemoveBehaviors(){
+    open func checkAndRemoveBehaviors() {
         if snapBehavior != nil{
             animatorDelegate.removeBehavior(snapBehavior!)
         }
@@ -317,7 +322,7 @@ open class CardView: UIView {
         }
     }
 
-    private func sendAndResetGesture(_ gesture: UIPanGestureRecognizer){
+    private func sendAndResetGesture(_ gesture: UIPanGestureRecognizer) {
         gesture.isEnabled = false
         checkAndRemoveBehaviors()
         animatorDelegate.addBehavior(snapBehavior!)
@@ -333,7 +338,7 @@ open class CardView: UIView {
         }
     }
 
-    private func removeShadow(){
+    private func removeShadow() {
         self.layer.shadowColor = UIColor.clear.cgColor
         self.layer.shadowOffset = CGSize.zero
         self.layer.shadowOpacity = 0
@@ -352,8 +357,7 @@ extension CardView: UIGestureRecognizerDelegate {
     // Make recognizer play nice with other gestures accept for edge pan gestures.
     // We need that space
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        let shouldFail = (gestureRecognizer is UIPanGestureRecognizer && otherGestureRecognizer is UIScreenEdgePanGestureRecognizer)
-        return shouldFail
+        return (gestureRecognizer is UIPanGestureRecognizer && otherGestureRecognizer is UIScreenEdgePanGestureRecognizer)
     }
 
 }
