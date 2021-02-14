@@ -8,11 +8,9 @@
 
 import UIKit
 
-
-
 class SheeshView: UILabel {
     
-    var hasLaidOut = false
+    private var hasLaidOut = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +20,6 @@ class SheeshView: UILabel {
         text = "Calm the hell down. Sheesh."
         textAlignment = .center
         font = .systemFont(ofSize: 14)
-        
         
     }
     

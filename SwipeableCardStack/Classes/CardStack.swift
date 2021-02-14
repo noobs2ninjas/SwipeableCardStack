@@ -88,6 +88,7 @@ open class CardStack: UIView {
 
     // MARK: Card Loading
     private func loadCards(_ animated: Bool) {
+        
         if animated {
             self.alpha = 0
         }
@@ -97,40 +98,41 @@ open class CardStack: UIView {
         }
         
         for (index, card) in currentArray.enumerated() {
+            // Enable user interaction for top card so that all other cards do not recieve the same tap and pan gesture calls.
             card.delegate = self
             let isTop = index == 0
             card.isUserInteractionEnabled = index == 0
             isTop ? addSubview(card) : insertSubview(card, belowSubview: currentArray[index - 1])
         }
 
-        if !animated {
-            return
+        if animated {
+            transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+
+            UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveEaseIn) {
+                
+                self.transform = CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
+                self.alpha = 1
+            } completion: { _ in
+                
+                for card in self.currentArray {
+                    card.finishSetup()
+                    self.isUserInteractionEnabled = true
+                }
+                self.isAnimating = false
+                if let newCards = self.waitingCards, !newCards.isEmpty {
+                    self.waitingCards = nil
+                    self.loadCards(withCardArray: newCards, animated: true)
+                }
+            }
         }
         
-        transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
-
-        UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveEaseIn, animations: {
-            
-            self.transform = CGAffineTransform.identity.scaledBy(x: 1.0, y: 1.0)
-            self.alpha = 1
-        }, completion: { (completed) in
-            for card in self.currentArray {
-                card.finishSetup()
-                self.isUserInteractionEnabled = true
-            }
-            
-            self.isAnimating = false
-
-            if let newCards = self.waitingCards, !newCards.isEmpty {
-                self.waitingCards = nil
-                self.loadCards(withCardArray: newCards, animated: true)
-            }
-            
-        })
-        
     }
-
+    
+    // TODO: Remove return and argument. Once setup cards is called its always set to Original array.
+    // Just set OriginalArray to array argument and call setupCards()
     fileprivate func setupCards(inArray cardArray: [CardView]) -> [CardView]{
+        // For each card in stack make sure frame is same as stack size.
+        // Add stack view as delegate and animator delegate for each card.
         for card in cardArray {
             card.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
             card.animatorDelegate = self
@@ -171,20 +173,6 @@ open class CardStack: UIView {
         super.layoutSubviews()
     }
 
-    fileprivate func clear() {
-        for card in currentArray{
-            card.removeFromSuperview()
-        }
-        currentArray.removeAll()
-    }
-
-    open func reloadStack(_ animated: Bool) {
-        clear()
-        currentArray = originalArray
-        shouldReset = true
-        setNeedsLayout()
-    }
-
     open func loadCards(withCardArray cardArray: [CardView], animated: Bool) {
         
         if isAnimating {
@@ -203,7 +191,15 @@ open class CardStack: UIView {
         loadCards(true)
         
     }
-
+    
+    open func reloadStack(_ animated: Bool) {
+        clear()
+        currentArray = originalArray
+        shouldReset = true
+        setNeedsLayout()
+    }
+    
+    // MARK: Card Actions
     open func addCard(_ card: CardView) {
         // TODO: Create que that allows cards to be added between touches.
         // Strange things happen if loading cards while view is being interacted with
@@ -240,6 +236,13 @@ open class CardStack: UIView {
             self.isUserInteractionEnabled = true
         }
     }
+    
+    internal func clear() {
+        for card in currentArray{
+            card.removeFromSuperview()
+        }
+        currentArray.removeAll()
+    }
 }
 
 // MARK: CardViewDelegate
@@ -274,7 +277,7 @@ extension CardStack: CardViewDelegate {
         timer.invalidate()
     }
 
-    public func cardWasTapped(_ card: CardView, shouldHighlight: Bool) {
+    public func cardWasTapped(_ card: CardView, shouldHighlight:Bool) {
 
         // TODO: Add tap effect
         if shouldHighlight && cardSelected == nil {
@@ -283,7 +286,6 @@ extension CardStack: CardViewDelegate {
             cardSelected = card
 
             let timer = Timer(fireAt: Date().addingTimeInterval(0.2), interval: 0.2, target: self, selector: #selector(unselectCard), userInfo: nil, repeats: false)
-
             RunLoop.main.add(timer, forMode: RunLoop.Mode.default)
         }
         

@@ -81,7 +81,6 @@ extension ViewController: CardStackDelegate {
             }
         }
 
-        
     }
     
     func cardWasTapped(_ card: CardView) {

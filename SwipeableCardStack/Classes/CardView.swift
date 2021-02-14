@@ -10,8 +10,20 @@ import UIKit
 
 public protocol CardViewDelegate: AnyObject {
     func cardWasSwiped(_ card: CardView)
+    
+    /// Called when a user taps the card.
+    /// - Parameters:
+    ///   - card: The CardView that was tapped.
+    ///   - shouldHighlight: Currently is always true but will determine if card changes visually confirm tap was detected.
     func cardWasTapped(_ card: CardView, shouldHighlight:Bool)
+    
+    /// Called to give delegate the ability to disable disable dragging on specific card.
+    /// - Parameter card: The card the user is attempting to drag.
+    /// - Returns: A boolean on weather or not to recognize pan gesture aka drag.
     func shouldDragCard(_ card: CardView) -> Bool
+    
+    /// Called to notify delegate when a drag has concluded on a card.
+    /// - Parameter card: The card the user finished dragging.
     func dragEndedOnCard(_ card: CardView)
 }
 
@@ -30,33 +42,42 @@ open class CardView: UIView {
     weak var delegate: CardViewDelegate!
     weak var animatorDelegate: AnimatorDelegate!
 
-    fileprivate var panGestureRecognizer: UIPanGestureRecognizer!
-    fileprivate var tapGestureRecognizer: UITapGestureRecognizer!
+    private var panGestureRecognizer: UIPanGestureRecognizer!
+    private var tapGestureRecognizer: UITapGestureRecognizer!
 
-    fileprivate var snapBehavior: UISnapBehavior?
-    fileprivate var attachmentBehavior: UIAttachmentBehavior?
-    fileprivate var dynamicItemBehavior: UIDynamicItemBehavior?
+    private var snapBehavior: UISnapBehavior?
+    private var attachmentBehavior: UIAttachmentBehavior?
+    private var dynamicItemBehavior: UIDynamicItemBehavior?
 
     fileprivate var lastTime: CFAbsoluteTime!
     fileprivate var angularVelocity: CGFloat = 0.0
     fileprivate var lastAngle: Float = 0.0
     fileprivate var initialCenter: CGPoint?
 
-    private var selectedView: SelectedView?
+    fileprivate var selectedView: SelectedView?
     private var originalFrame: CGRect?
 
     open var isOriginal = true
-
+    
+    /// Is called before user animation begins as notification.
+    /// To prevent user interaction inherit CardViewDelegate's shouldDragCard.
     internal func snapshotReady(){}
+    
+    /// Is called before user animation begins as notification.
+    /// To prevent user interaction inherit CardViewDelegate's shouldDragCard.
     internal func willBeginDrag(){}
+    
+    /// Function is called when user interaction ends and card is returned to its original position without being removed.
     internal func didEndDrag(){}
 
 
     // MARK: Lifecycle
+    
+    /// Called to initialize with CGRect.zero frame
     public init() {
         super.init(frame: .zero)
     }
-
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
@@ -67,15 +88,19 @@ open class CardView: UIView {
         setup()
     }
     
+    /// Initializes CardView as a container view.
+    /// Parameter view: UIView which holds cards content. Constraints are added to keep same frame as CardView
     public init(frame: CGRect, view: UIView) {
         super.init(frame: frame)
         setup()
         addSubview(view)
 
-        //Add constraints to view if user chooses to use CardView as a container
+        // Add constraints to view if user chooses to use CardView as a container
         addConstraints(toView: view)
     }
-
+    
+    /// Called to initialize CardView with CGRect.zero frame which is used as a container for  the view given.
+    /// Parameter view: UIView which holds cards content. Constraints are added to keep same frame as CardView
     public init(view: UIView) {
         super.init(frame: CGRect.zero)
         
@@ -86,7 +111,7 @@ open class CardView: UIView {
         addConstraints(toView: view)
     }
 
-    fileprivate func addConstraints(toView view: UIView) {
+    private func addConstraints(toView view: UIView) {
         NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1.0, constant: 0).isActive = true
         NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1.0, constant: 0).isActive = true
         NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0).isActive = true
@@ -128,22 +153,22 @@ open class CardView: UIView {
         tapGestureRecognizer.delegate = self
     }
 
-    open func finishSetup(){
+    public func finishSetup(){
         addGestureRecognizer(tapGestureRecognizer)
         addGestureRecognizer(panGestureRecognizer)
         snapshotReady()
     }
 
     //MARK: GestureRecognizers
-    @objc func tapRecognized(_ recogznier: UITapGestureRecognizer) {
+    @objc private func tapRecognized(_ recogznier: UITapGestureRecognizer) {
         delegate.cardWasTapped(self, shouldHighlight: true)
     }
     
-    var cardStack: UIView {
+    private var cardStack: UIView {
         return self.superview!.superview!
     }
 
-    @objc func panGestureRecognized(gesture: UIPanGestureRecognizer) {
+    @objc private func panGestureRecognized(gesture: UIPanGestureRecognizer) {
         
         switch gesture.state {
         
@@ -204,9 +229,8 @@ open class CardView: UIView {
         }
     }
     
-    public func setSelected(_ selected: Bool, withImage image:UIImage?, andColor color: UIColor?, andTime time: TimeInterval) {
+    private func setSelected(_ selected: Bool, withImage image:UIImage?, andColor color: UIColor?, andTime time: TimeInterval) {
         if selected {
-            
             if selectedView == nil {
                 selectedView = SelectedView(frame: originalFrame ?? CGRect(x: 0, y: 0, width: frame.width, height: frame.height), image: image, color: color)
                 selectedView!.bounds = selectedView!.frame
@@ -271,11 +295,11 @@ open class CardView: UIView {
             if self.distance(a: point, b: center) <= 0.499 {
                 self.animatorDelegate.removeBehavior(self.snapBehavior!)
                 self.panGestureRecognizer.isEnabled = true
-                self.layer.shadowColor = UIColor.clear.cgColor
                 self.didEndDrag()
+                self.layer.shadowColor = UIColor.clear.cgColor
                 completion?()
             }
-            
+
         }
     }
 
@@ -316,7 +340,7 @@ open class CardView: UIView {
     }
 
     // MARK: Behavior Management
-    open func checkAndRemoveBehaviors() {
+    public func checkAndRemoveBehaviors() {
         
         if snapBehavior != nil {
             animatorDelegate.removeBehavior(snapBehavior!)
@@ -373,7 +397,9 @@ extension CardView: UIGestureRecognizerDelegate {
     // Make recognizer play nice with other gestures accept for edge pan gestures.
     // We need that space
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return (gestureRecognizer is UIPanGestureRecognizer && otherGestureRecognizer is UIScreenEdgePanGestureRecognizer)
+        let panGesture = gestureRecognizer is UIPanGestureRecognizer
+        let isEdgePanGesture = otherGestureRecognizer is UIScreenEdgePanGestureRecognizer
+        return panGesture && isEdgePanGesture
     }
 
 }
