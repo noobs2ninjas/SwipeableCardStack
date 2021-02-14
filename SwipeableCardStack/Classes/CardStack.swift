@@ -233,7 +233,7 @@ open class CardStack: UIView {
         //Animate card in
         UIView.animate(withDuration: 0.5, animations: {
             card.alpha = 1
-        }) { (completed) in
+        }) { _ in
             card.finishSetup()
             card.snapshotReady()
             card.isUserInteractionEnabled = true

@@ -9,7 +9,6 @@
 import UIKit
 
 public protocol CardViewDelegate: AnyObject {
-
     func cardWasSwiped(_ card: CardView)
     func cardWasTapped(_ card: CardView, shouldHighlight:Bool)
     func shouldDragCard(_ card: CardView) -> Bool
@@ -24,7 +23,10 @@ public protocol AnimatorDelegate: class {
 }
 
 open class CardView: UIView {
-
+    
+    // MARK:Constants and Variable
+    internal let snapDistance = 0.499
+    
     weak var delegate: CardViewDelegate!
     weak var animatorDelegate: AnimatorDelegate!
 
@@ -52,8 +54,7 @@ open class CardView: UIView {
 
     // MARK: Lifecycle
     public init() {
-        super.init(frame: CGRect.zero)
-        setup()
+        super.init(frame: .zero)
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -65,10 +66,11 @@ open class CardView: UIView {
         super.init(frame: frame)
         setup()
     }
+    
     public init(frame: CGRect, view: UIView) {
         super.init(frame: frame)
         setup()
-        addSubview(view);
+        addSubview(view)
 
         //Add constraints to view if user chooses to use CardView as a container
         addConstraints(toView: view)
@@ -91,6 +93,7 @@ open class CardView: UIView {
         NSLayoutConstraint(item: view, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0).isActive = true
     }
     
+    // MARK: DEINIT
     // Remove behaviors and gesture recognizers when deinitializing to avoid leaks
     deinit {
         
@@ -112,7 +115,8 @@ open class CardView: UIView {
 
         gestureRecognizers?.removeAll()
     }
-
+    
+    // MARK: Setup
     private func setup() {
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognized))
         panGestureRecognizer.maximumNumberOfTouches = 1
@@ -134,10 +138,15 @@ open class CardView: UIView {
     @objc func tapRecognized(_ recogznier: UITapGestureRecognizer) {
         delegate.cardWasTapped(self, shouldHighlight: true)
     }
+    
+    var cardStack: UIView {
+        return self.superview!.superview!
+    }
 
     @objc func panGestureRecognized(gesture: UIPanGestureRecognizer) {
-
+        
         switch gesture.state {
+        
         case .began:
             if !delegate.shouldDragCard(self) {
                 break
@@ -160,22 +169,21 @@ open class CardView: UIView {
             let offset = UIOffset(horizontal: CGFloat(point.x - frame.width/2),
                                   vertical: CGFloat(point.y - frame.height/2))
 
-            let anchor: CGPoint = gesture.location(in: superview!.superview!)
+            let anchor: CGPoint = gesture.location(in: cardStack)
 
             // This is used for velocity and to give clean predictable angles
             lastTime = CFAbsoluteTimeGetCurrent()
             lastAngle = angleOfView(self)
 
-            addAttachmentBehavior(withOffset: offset, andAnchor: anchor)
+            setAttachmentBehavior(withOffset: offset, andAnchor: anchor)
             break
         case .changed:
             
-            let anchorPoint = gesture.location(in: superview!.superview!)
-            attachmentBehavior!.anchorPoint = anchorPoint
+            attachmentBehavior!.anchorPoint = gesture.location(in: cardStack)
             break
         case .ended:
 
-            let velocity: CGPoint = gesture.velocity(in: superview!.superview)
+            let velocity: CGPoint = gesture.velocity(in: cardStack)
             let scalarVelocity: Float = sqrtf(Float((velocity.x * velocity.x) + (velocity.y * velocity.y)))
             
             // If scalarVelocity is not enough we just snap it back
@@ -195,37 +203,41 @@ open class CardView: UIView {
         default: break
         }
     }
-
-    public func setSelected(_ selected: Bool, withImage image:UIImage?, andColor color: UIColor?, andTime time: TimeInterval){
+    
+    public func setSelected(_ selected: Bool, withImage image:UIImage?, andColor color: UIColor?, andTime time: TimeInterval) {
         if selected {
+            
             if selectedView == nil {
                 selectedView = SelectedView(frame: originalFrame ?? CGRect(x: 0, y: 0, width: frame.width, height: frame.height), image: image, color: color)
                 selectedView!.bounds = selectedView!.frame
                 selectedView?.alpha = 0
             }
-            addSubview(selectedView!)
             
+            addSubview(selectedView!)
+
             UIView.animate(withDuration: time) {
                 self.selectedView?.alpha = 1
             }
             
         } else {
+            
             UIView.animate(withDuration: time, animations: {
                 self.selectedView?.alpha = 0
-            }, completion: { (completed) in
+            }) { _ in
                 self.selectedView?.removeFromSuperview()
                 self.selectedView = nil
-            })
+            }
         }
     }
 
     //MARK: Behavior Functions
-    fileprivate func addAttachmentBehavior(withOffset offset: UIOffset, andAnchor anchor: CGPoint) {
+    fileprivate func setAttachmentBehavior(withOffset offset: UIOffset, andAnchor anchor: CGPoint) {
         attachmentBehavior = UIAttachmentBehavior(item: self, offsetFromCenter: offset, attachedToAnchor: anchor)
         attachmentBehavior?.action = {
             let time = CFAbsoluteTimeGetCurrent()
             let angle = self.angleOfView(self)
-
+            
+            // If time has passed set angular velocity
             if time > self.lastTime! {
                 self.angularVelocity = CGFloat(Double(angle - self.lastAngle) / (time - self.lastTime));
             }
@@ -268,6 +280,7 @@ open class CardView: UIView {
     }
 
     fileprivate func getDynamicBehavior(withVelocity velocity: CGPoint) -> UIDynamicItemBehavior {
+        
         let dynamicBehavior = UIDynamicItemBehavior(items: [self])
         dynamicBehavior.addLinearVelocity(velocity, for: self)
         dynamicBehavior.addAngularVelocity(angularVelocity, for: self)
@@ -304,20 +317,23 @@ open class CardView: UIView {
 
     // MARK: Behavior Management
     open func checkAndRemoveBehaviors() {
-        if snapBehavior != nil{
+        
+        if snapBehavior != nil {
             animatorDelegate.removeBehavior(snapBehavior!)
+            snapBehavior = nil
         }
 
-        if attachmentBehavior != nil{
+        if attachmentBehavior != nil {
             animatorDelegate.removeBehavior(attachmentBehavior!)
             attachmentBehavior = nil
         }
 
-        if dynamicItemBehavior != nil{
+        if dynamicItemBehavior != nil {
             animatorDelegate.removeBehavior(dynamicItemBehavior!)
             dynamicItemBehavior = nil
         }
-        if animatorDelegate != nil{
+        
+        if animatorDelegate != nil {
             animatorDelegate.removeGravity(fromCard: self)
         }
     }
