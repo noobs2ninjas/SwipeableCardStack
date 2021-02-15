@@ -47,7 +47,7 @@ open class CardStack: UIView {
     fileprivate lazy var animator: UIDynamicAnimator =  {
         return UIDynamicAnimator(referenceView: superview ?? self)
     }()
-
+    
     fileprivate lazy var gravityBehavior: UIGravityBehavior = {
         let newGavityBehavior = UIGravityBehavior(items: [])
         newGavityBehavior.magnitude = 3
@@ -174,17 +174,19 @@ open class CardStack: UIView {
     }
 
     open func loadCards(withCardArray cardArray: [CardView], animated: Bool) {
-        
+        // If adding card but a card is currently animating then add it to waiting.
         if isAnimating {
             waitingCards = cardArray
             return
         }
         
+        // If original array is not empty then clear it and get ready to be loaded with new array.
         if !originalArray.isEmpty {
             clear()
             originalArray.removeAll()
         }
         
+        // Setup cards and load the stack in
         originalArray = setupCards(inArray: cardArray)
         currentArray = originalArray
         isAnimating = true

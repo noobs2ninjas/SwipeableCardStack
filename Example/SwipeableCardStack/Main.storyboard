@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,23 +20,35 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rqa-hM-Hfs" customClass="CardStack" customModule="SwipeableCardStack">
-                                <rect key="frame" x="77" y="148" width="221" height="221"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="30" y="175.5" width="315" height="316"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Rqa-hM-Hfs" secondAttribute="height" multiplier="1:1" id="ToI-7E-BC2"/>
+                                    <constraint firstAttribute="height" secondItem="Rqa-hM-Hfs" secondAttribute="width" multiplier="1:1" constant="1" id="ToI-7E-BC2"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fhs-AX-79e" customClass="MessageView" customModule="SwipeableCardStack_Example" customModuleProvider="target">
+                                <rect key="frame" x="162.5" y="521.5" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="E2A-WA-muK"/>
+                                    <constraint firstAttribute="height" constant="50" id="sHi-sh-QLF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Rqa-hM-Hfs" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="77" id="GIa-CG-x3b"/>
-                            <constraint firstItem="Rqa-hM-Hfs" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="OZu-9h-dnI"/>
-                            <constraint firstAttribute="trailing" secondItem="Rqa-hM-Hfs" secondAttribute="trailing" constant="77" id="rpA-1b-Isk"/>
-                            <constraint firstItem="Rqa-hM-Hfs" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="148" id="vcg-D9-Zug"/>
+                            <constraint firstItem="Fhs-AX-79e" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="3vu-6F-7Q7"/>
+                            <constraint firstItem="Rqa-hM-Hfs" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="QNK-Ey-j0G"/>
+                            <constraint firstAttribute="trailing" secondItem="Rqa-hM-Hfs" secondAttribute="trailing" constant="30" id="htv-iM-xU9"/>
+                            <constraint firstItem="Fhs-AX-79e" firstAttribute="top" secondItem="Rqa-hM-Hfs" secondAttribute="bottom" constant="30" id="isL-kO-9bq"/>
+                            <constraint firstItem="Rqa-hM-Hfs" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="30" id="nyp-eT-XC6"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cardStack" destination="Rqa-hM-Hfs" id="Ofk-HG-BYl"/>
+                        <outlet property="messageView" destination="Fhs-AX-79e" id="vSU-rR-rUp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -45,9 +56,4 @@
             <point key="canvasLocation" x="128.80000000000001" y="132.68365817091455"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

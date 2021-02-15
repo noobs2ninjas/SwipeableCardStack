@@ -37,8 +37,9 @@ public protocol AnimatorDelegate: class {
 open class CardView: UIView {
     
     // MARK:Constants and Variable
-    internal let snapDistance = 0.499
+    internal let snapDistance = 0.499 /// If user does not drag beyond this distance the card will be dragged back.
     
+    // TODO: Change delegates to set functions
     weak var delegate: CardViewDelegate!
     weak var animatorDelegate: AnimatorDelegate!
 
@@ -110,15 +111,7 @@ open class CardView: UIView {
         //Add constraints to view if user chooses to use CardView as a container
         addConstraints(toView: view)
     }
-
-    private func addConstraints(toView view: UIView) {
-        NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: view, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0).isActive = true
-    }
     
-    // MARK: DEINIT
     // Remove behaviors and gesture recognizers when deinitializing to avoid leaks
     deinit {
         
@@ -141,6 +134,14 @@ open class CardView: UIView {
         gestureRecognizers?.removeAll()
     }
     
+    // Used to add constraints to a content view.
+    private func addConstraints(toView view: UIView) {
+        NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: view, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0).isActive = true
+    }
+    
     // MARK: Setup
     private func setup() {
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognized))
@@ -159,7 +160,7 @@ open class CardView: UIView {
         snapshotReady()
     }
 
-    //MARK: GestureRecognizers
+    // MARK: GestureRecognizers
     @objc private func tapRecognized(_ recogznier: UITapGestureRecognizer) {
         delegate.cardWasTapped(self, shouldHighlight: true)
     }
@@ -189,12 +190,12 @@ open class CardView: UIView {
 
             checkAndRemoveBehaviors()
 
-            //Find where finger is on card and apply that offset as we compare card to superview.
+            // Find where finger is on card and apply that offset as we compare card to superview.
             let point = gesture.location(in: self)
             let offset = UIOffset(horizontal: CGFloat(point.x - frame.width/2),
                                   vertical: CGFloat(point.y - frame.height/2))
 
-            let anchor: CGPoint = gesture.location(in: cardStack)
+            let anchor: CGPoint = gesture.location(in: superview!.superview!)
 
             // This is used for velocity and to give clean predictable angles
             lastTime = CFAbsoluteTimeGetCurrent()
@@ -217,7 +218,7 @@ open class CardView: UIView {
                 break
             }
             
-            //Fling card off by applying gravity and force behaviors.
+            // Fling card off by applying gravity and force behaviors.
             animatorDelegate.removeBehavior(attachmentBehavior!)
             gesture.isEnabled = false
             dynamicItemBehavior = getDynamicBehavior(withVelocity: velocity)
@@ -229,6 +230,8 @@ open class CardView: UIView {
         }
     }
     
+    
+    /// Used to change view to show card is selected.
     private func setSelected(_ selected: Bool, withImage image:UIImage?, andColor color: UIColor?, andTime time: TimeInterval) {
         if selected {
             if selectedView == nil {
@@ -271,7 +274,8 @@ open class CardView: UIView {
         }
         animatorDelegate.addBehavior(attachmentBehavior!)
     }
-
+    
+    /// Used to snap card to point
     public func addSnapBehavior(toPoint point: CGPoint, completion: (()->Void)? = nil) {
         
         if attachmentBehavior != nil {
@@ -302,7 +306,8 @@ open class CardView: UIView {
 
         }
     }
-
+    
+    // Create behavior to perform fling by adding velocity and angular velocity and adding weight.
     fileprivate func getDynamicBehavior(withVelocity velocity: CGPoint) -> UIDynamicItemBehavior {
         
         let dynamicBehavior = UIDynamicItemBehavior(items: [self])
@@ -328,7 +333,7 @@ open class CardView: UIView {
         return dynamicBehavior
     }
 
-    // MARK: Gesture calculation functions
+    // MARK: Gesture calculation func
     fileprivate func distance(a: CGPoint, b: CGPoint) -> CGFloat {
         let xDist = a.x - b.x
         let yDist = a.y - b.y
@@ -363,12 +368,14 @@ open class CardView: UIView {
     }
 
     private func sendAndResetGesture(_ gesture: UIPanGestureRecognizer) {
+        // Stop card from recognizing gesture until card is snapped back to its origin and we've removed all current behaviors.
         gesture.isEnabled = false
         checkAndRemoveBehaviors()
         animatorDelegate.addBehavior(snapBehavior!)
         gesture.isEnabled = true
     }
-
+    
+    // Used to show that card is picked up
     private func applyPlainShadow() {
         UIView.animate(withDuration: 0.4) {
             self.layer.shadowColor = UIColor.black.cgColor
@@ -377,7 +384,8 @@ open class CardView: UIView {
             self.layer.shadowRadius = 8
         }
     }
-
+    
+    // Shadow removed if the card snapped back
     private func removeShadow() {
         self.layer.shadowColor = UIColor.clear.cgColor
         self.layer.shadowOffset = CGSize.zero

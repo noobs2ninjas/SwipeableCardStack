@@ -14,9 +14,12 @@ let CARD_COUNT = 10
 class ViewController: UIViewController {
     
     @IBOutlet var cardStack: CardStack!
+    @IBOutlet var messageView: MessageView!
+    
+    var index = 0 /// tracks what index we are on for swipe messages
+    var firstLoad = false /// Make sure we only load view array and stack once
     
     // Lazy instatiation of CardView Array and Sheesh View
-    
     lazy var cards:[CardView] = {
         var viewArray = [CardView]()
         
@@ -28,9 +31,22 @@ class ViewController: UIViewController {
         return viewArray
     }()
     
-    // When view appears load card stack and set delegate
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        messageView.alpha = 0
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidAppear(animated)
+        
+        guard !firstLoad else {
+            return
+        }
+        
+        firstLoad = true
+        
+        // When view appears load card stack and set delegate
         cardStack.loadCards(withCardArray: cards, animated: true)
         cardStack.delegate = self
     }
@@ -40,6 +56,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /// Used to create card with a label that has a number for text.
     func createView(withNumber number: Int) -> CardView {
         
         let textLabel = UILabel(frame: .zero)
@@ -52,36 +69,24 @@ class ViewController: UIViewController {
         
         return CardView(view: textLabel)
     }
+    
+    func addMessageView(withText text:String) {
+        messageView.text = text
+        // animate in
+        UIView.animate(withDuration: 0.5) {
+            self.messageView.alpha = 1
+        } completion: { _ in
+            // Wait half a second and animate out
+            UIView.animate(withDuration: 0.5, delay: 0.5, options: .transitionCurlUp) {
+                self.messageView.alpha = 0
+            }
+        }
+    }
 }
 
 
 // MARK:  Card Stack Delegate
 extension ViewController: CardStackDelegate {
-    
-    func addCalmDownView() {
-        
-        let width: CGFloat = 220
-        let height: CGFloat = 50
-        
-        let frame = CGRect(x: self.view.frame.width/2 - width/2, y: self.view.frame.height/2 - height/2, width: width, height: height)
-        
-        let calmDownView = SheeshView(frame: frame)
-        calmDownView.alpha = 0
-        
-        view.addSubview(calmDownView)
-        
-        // animate in
-        UIView.animate(withDuration: 0.5) {
-            calmDownView.alpha = 1
-        } completion: { _ in
-            UIView.animate(withDuration: 0.5, delay: 0.5, options: .transitionCurlUp) {
-                calmDownView.alpha = 0
-            } completion: { _ in
-                calmDownView.removeFromSuperview()
-            }
-        }
-
-    }
     
     func cardWasTapped(_ card: CardView) {
         // When card is tapped loop through subviews to find our label
@@ -93,11 +98,11 @@ extension ViewController: CardStackDelegate {
                                                             preferredStyle: .alert)
                 
                 let yesAction = UIAlertAction(title: "Yes!", style: .default) { _ in
-                    self.addCalmDownView()
+                    self.addMessageView(withText: "Calm the hell down. Sheesh.")
                 }
                 
                 let yesserAction = UIAlertAction(title: "YES!!!", style: .default) { _ in
-                    self.addCalmDownView()
+                    self.addMessageView(withText: "Calm the hell down. Sheesh.")
                 }
                 
                 alertViewController.addAction(yesAction)
@@ -109,7 +114,13 @@ extension ViewController: CardStackDelegate {
     }
     
     func cardWasSwiped(_ card: CardView, onCardStack CardStack: CardStack) {
-         
+        let array = ["Nice", "Great! You figured it out.", "Ok. Guess we dont need that card.", "Is this some kind of sick game to you!?", "What was wrong with that one!?", "You're a monster!!!", "Fine. Throw them all away!!!", "You're a sick sick puppy."]
+        
+        if index < array.count {
+            addMessageView(withText: array[index])
+            index += 1
+        }
+        
     }
     
 }

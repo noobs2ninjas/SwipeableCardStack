@@ -15,7 +15,7 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		7FA3261909996AFE0EF78BD1 /* Pods_SwipeableCardStack_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A710E5FAE3112D6F388D093D /* Pods_SwipeableCardStack_Tests.framework */; };
 		E35B535F25D766E8003D838F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35B535E25D766E8003D838F /* Main.storyboard */; };
-		E35B536525D77DA0003D838F /* SheeshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35B536425D77DA0003D838F /* SheeshView.swift */; };
+		E35B536525D77DA0003D838F /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35B536425D77DA0003D838F /* MessageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +48,7 @@
 		CB389A3C38C06EF45D5D7793 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		CF2B9C98863143B5FC788C58 /* Pods_SwipeableCardStack_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeableCardStack_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E35B535E25D766E8003D838F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		E35B536425D77DA0003D838F /* SheeshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheeshView.swift; sourceTree = "<group>"; };
+		E35B536425D77DA0003D838F /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +97,7 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				E35B536425D77DA0003D838F /* SheeshView.swift */,
+				E35B536425D77DA0003D838F /* MessageView.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				E35B535E25D766E8003D838F /* Main.storyboard */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -215,6 +215,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 4JG3A7PLF6;
 						LastSwiftMigration = 1150;
 					};
 					607FACE41AFB9204008FA782 = {
@@ -333,7 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E35B536525D77DA0003D838F /* SheeshView.swift in Sources */,
+				E35B536525D77DA0003D838F /* MessageView.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
@@ -473,7 +474,9 @@
 			baseConfigurationReference = C8885487E49C880536774F19 /* Pods-SwipeableCardStack_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4JG3A7PLF6;
 				INFOPLIST_FILE = SwipeableCardStack/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -489,7 +492,9 @@
 			baseConfigurationReference = C90D2352E378C7A333B09700 /* Pods-SwipeableCardStack_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4JG3A7PLF6;
 				INFOPLIST_FILE = SwipeableCardStack/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";

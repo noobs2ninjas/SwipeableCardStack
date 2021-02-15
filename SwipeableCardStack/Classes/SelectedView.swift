@@ -53,8 +53,7 @@ class SelectedView: UIView {
         let imageContext = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
-        // create image mask
-
+        // Create image mask
         let cgimage = imageContext?.cgImage!
         let bytesPerRow = cgimage!.bytesPerRow
         let dataProvider = cgimage!.dataProvider
@@ -72,8 +71,7 @@ class SelectedView: UIView {
                            decode: nil,
                            shouldInterpolate: false)
 
-        // create background
-
+        // Create background with mask clipped into it
         UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, 0)
         UIGraphicsGetCurrentContext()!.clip(to: imageView.bounds, mask: mask!)
         color != nil ? color!.setFill() : UIColor.green.withAlphaComponent(0.4).setFill()
