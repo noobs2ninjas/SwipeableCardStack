@@ -36,7 +36,7 @@ public protocol AnimatorDelegate: class {
 
 open class CardView: UIView {
     
-    // MARK:Constants and Variable
+    // MARK: Constants and Variable
     internal let snapDistance = 0.499 /// If user does not drag beyond this distance the card will be dragged back.
     
     // TODO: Change delegates to set functions
